@@ -26,6 +26,18 @@ public class TilePuzzleState implements IProblemState
 		_lastMove	= lastMove;
 	}
 
+	public TilePuzzleState
+			(
+					TilePuzzleState other
+			)
+	{
+		_problem	= new TilePuzzle(other.getTilePuzzleCopy());
+		_tilePuzzle	= other.getTilePuzzleCopy();
+		_zeroRow	= other._zeroRow;
+		_zeroCol	= other._zeroCol;
+		_lastMove	= other._lastMove;
+	}
+
 	@Override
 	public List<IProblemState> getNeighborStates() 
 	{
@@ -193,8 +205,9 @@ public class TilePuzzleState implements IProblemState
 		return toPrint;
 	}
 
-	public Object getCurrentState(){
+	public Object getCurrentStateCopy(){
 		return this._tilePuzzle;
 	}
+
 
 }

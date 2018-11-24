@@ -14,7 +14,8 @@ public class TilePuzzleHeuristic implements IHeuristic
 	}
 
 	private int initState(IProblemState problemState) {
-		int[][] myGridState = (int[][])problemState.getCurrentState();
+		IProblemState reducedProblem = new TilePuzzleState((TilePuzzleState)problemState);
+		int[][] myGridState = (int[][])reducedProblem.getCurrentStateCopy();
 		int size = myGridState.length;
 		for (int row = 0; row < size; row ++)
 			for (int col = 0; col < size; col ++)
@@ -23,14 +24,19 @@ public class TilePuzzleHeuristic implements IHeuristic
 							myGridState[row][col] == 7 ||
 								myGridState[row][col] == 8)
 					myGridState[row][col] = 0;
-		return solveState(problemState);
+		return solveState(reducedProblem);
 	}
 
 	private int solveState(IProblemState problemState) {
 		UniformCostSearch 	ucs = new UniformCostSearch();
 		IProblem myProblem = problemState.getProblem();
 		List<IProblemMove> mySol = ucs.solve(myProblem);
-		return mySol.size();
+		if(mySol != null) {
+			return mySol.size();
+		}
+		else{
+			return 0;
+		}
 	}
 	
 }

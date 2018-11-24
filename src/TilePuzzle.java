@@ -25,7 +25,19 @@ public class TilePuzzle implements IProblem
 		importInstance(problemName);
 		_heuristic = new TilePuzzleHeuristic();
 	}
-	
+
+	public TilePuzzle
+			(
+					int[][] tilePuzzle
+			)
+	{
+		importInstance(problemName);
+		_heuristic = new TilePuzzleHeuristic();
+		_tilePuzzle = tilePuzzle;
+		_size = tilePuzzle.length;
+	}
+
+
 	
 	@Override
 	public IProblemState getProblemState() 

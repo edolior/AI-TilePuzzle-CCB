@@ -1,6 +1,6 @@
 import java.util.List;
 
-public interface IProblemState 
+public interface IProblemState
 {	
 	public List<IProblemState> 	getNeighborStates();
 	
@@ -14,6 +14,6 @@ public interface IProblemState
 	
 	public IProblemState 		performMove(IProblemMove move);
 
-	public Object				getCurrentState();
+	public Object				getCurrentStateCopy();
 
 }
