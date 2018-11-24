@@ -30,7 +30,11 @@ public class TilePuzzleHeuristic implements IHeuristic
 		UniformCostSearch 	ucs = new UniformCostSearch();
 		IProblem myProblem = problemState.getProblem();
 		List<IProblemMove> mySol = ucs.solve(myProblem);
-		return mySol.size();
+		if (mySol != null)
+			return mySol.size();
+		else
+			return 0;
+
 	}
 	
 }
