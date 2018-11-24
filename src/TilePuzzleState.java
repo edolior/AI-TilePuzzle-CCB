@@ -62,7 +62,18 @@ public class TilePuzzleState implements IProblemState
 	public boolean isGoalState() 
 	{
 		int size = _problem._size;
-		
+		String stateStr ="";
+		String goal = "12340";
+		for (int i = 0; i <=size ; i++) {
+			goal = goal.concat("1");
+		}
+		for (int row = 0; row < size; row ++)
+			for (int col = 0; col < size; col ++)
+				stateStr = stateStr.concat(Integer.toString(_tilePuzzle[row][col]));
+
+		if(goal.equals(stateStr)){
+			return true;
+		}
 		for (int row = 0; row < size; row ++)
 			for (int col = 0; col < size; col ++)
 				if (_tilePuzzle[row][col] != 0 						&&

@@ -23,7 +23,7 @@ public class TilePuzzleHeuristic implements IHeuristic
 						myGridState[row][col] == 6 ||
 							myGridState[row][col] == 7 ||
 								myGridState[row][col] == 8)
-					myGridState[row][col] = 0;
+					myGridState[row][col] = 1;
 		((TilePuzzle)reducedProblem.getProblem()).setTilePuzzle(myGridState,(TilePuzzle)problemState.getProblem());
 		return solveState(reducedProblem);
 	}
