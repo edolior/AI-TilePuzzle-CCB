@@ -24,6 +24,7 @@ public class TilePuzzleHeuristic implements IHeuristic
 							myGridState[row][col] == 7 ||
 								myGridState[row][col] == 8)
 					myGridState[row][col] = 0;
+		((TilePuzzle)reducedProblem.getProblem()).setTilePuzzle(myGridState,(TilePuzzle)problemState.getProblem());
 		return solveState(reducedProblem);
 	}
 

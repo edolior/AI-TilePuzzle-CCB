@@ -31,7 +31,7 @@ public class TilePuzzleState implements IProblemState
 					TilePuzzleState other
 			)
 	{
-		_problem	= new TilePuzzle(other.getTilePuzzleCopy());
+		_problem	= new TilePuzzle();
 		_tilePuzzle	= other.getTilePuzzleCopy();
 		_zeroRow	= other._zeroRow;
 		_zeroCol	= other._zeroCol;

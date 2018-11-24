@@ -26,19 +26,7 @@ public class TilePuzzle implements IProblem
 		_heuristic = new TilePuzzleHeuristic();
 	}
 
-	public TilePuzzle
-			(
-					int[][] tilePuzzle
-			)
-	{
-		importInstance(problemName);
-		_heuristic = new TilePuzzleHeuristic();
-		_tilePuzzle = tilePuzzle;
-		_size = tilePuzzle.length;
-	}
 
-
-	
 	@Override
 	public IProblemState getProblemState() 
 	{
@@ -152,4 +140,17 @@ public class TilePuzzle implements IProblem
 		return false;
 	}
 
+	public void setTilePuzzle(int[][] otherTile ,TilePuzzle other)
+	{
+		_size = other._size;
+		_heuristic = other._heuristic;
+		_zeroCol = other._zeroCol;
+		_zeroRow = other._zeroRow;
+		_tilePuzzle = new int[_size][_size];
+		for (int row = 0; row < _size; row ++)
+			for (int col = 0; col < _size; col ++)
+			{
+				_tilePuzzle[row][col] =otherTile[row][col];
+			}
+	}
 }
