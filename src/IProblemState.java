@@ -14,4 +14,6 @@ public interface IProblemState
 	
 	public IProblemState 		performMove(IProblemMove move);
 
+	public Object				getCurrentState();
+
 }

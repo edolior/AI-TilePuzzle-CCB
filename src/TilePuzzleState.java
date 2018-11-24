@@ -193,4 +193,8 @@ public class TilePuzzleState implements IProblemState
 		return toPrint;
 	}
 
+	public Object getCurrentState(){
+		return this._tilePuzzle;
+	}
+
 }
