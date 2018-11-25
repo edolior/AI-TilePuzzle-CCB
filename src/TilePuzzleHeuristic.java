@@ -1,8 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+
 
 public class TilePuzzleHeuristic implements IHeuristic
 {
+
+	private HashMap<Integer, int[]> map;
 
 	@Override
 	public double getHeuristic
@@ -10,34 +12,49 @@ public class TilePuzzleHeuristic implements IHeuristic
 		IProblemState problemState
 	) 
 	{
-		return initState(problemState);
+		return calcH(problemState);
 	}
 
-	private int initState(IProblemState problemState) {
+	public void setHeuristic(String type){
+		int size = 0;
+		if (type.contains("3x3"))
+			size = 3;
+		else if (type.contains("4x4"))
+			size = 4;
+		map = new HashMap<>();
+		int count = 1;
+		boolean stop = false;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (i == size-1 && j == size-1)
+					map.put(0, new int[]{i, j});
+				else {
+					map.put(count, new int[]{i, j});
+					count++;
+				}
+			}
+		}
+	}
+
+	private int calcH(IProblemState problemState) {
 		IProblemState reducedProblem = new TilePuzzleState((TilePuzzleState)problemState);
 		int[][] myGridState = (int[][])reducedProblem.getCurrentStateCopy();
 		int size = myGridState.length;
+		int result = 0;
+		int destSpot = 0;
+		int currSpot = 0;
 		for (int row = 0; row < size; row ++)
-			for (int col = 0; col < size; col ++)
-				if (myGridState[row][col] == 5 ||
-						myGridState[row][col] == 6 ||
-							myGridState[row][col] == 7 ||
-								myGridState[row][col] == 8)
-					myGridState[row][col] = 1;
-		((TilePuzzle)reducedProblem.getProblem()).setTilePuzzle(myGridState,(TilePuzzle)problemState.getProblem());
-		return solveState(reducedProblem);
+			for (int col = 0; col < size; col ++) {
+				if (row == size-1 && col == size-1)
+					destSpot = 0;
+				else
+					destSpot = row * size + col + 1;
+				currSpot = myGridState[row][col];
+				if (currSpot != destSpot && currSpot != 0) {
+					int[] curr = map.get(currSpot);
+					result = result + ((Math.abs(row - curr[0]) + Math.abs(col - curr[1])) * currSpot);
+				}
+			}
+		return result;
 	}
-
-	private int solveState(IProblemState problemState) {
-		UniformCostSearch 	ucs = new UniformCostSearch();
-		IProblem myProblem = problemState.getProblem();
-		List<IProblemMove> mySol = ucs.solve(myProblem);
-		if(mySol != null) {
-			return mySol.size();
-		}
-		else{
-			return 0;
-		}
-	}
-	
 }

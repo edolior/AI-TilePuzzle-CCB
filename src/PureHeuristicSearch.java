@@ -135,11 +135,12 @@ public class PureHeuristicSearch  extends ASearch
 			boolean found = false;
 			ASearchNode minNode = null;
 			ASearchNode currNode = null;
-			while (iNode < size) {
+			while (iNode < size && !found) {
 				currNode = openList.poll();
 				if (node.getH() <= currNode.getH()) {
 					openList.add(node);
 					openList.add(currNode);
+					found = true;
 				}
 				else {
 					openList.add(currNode);
