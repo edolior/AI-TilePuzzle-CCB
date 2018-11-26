@@ -24,7 +24,6 @@ public class TilePuzzle implements IProblem
 	{
 		importInstance(problemName);
 		_heuristic = new TilePuzzleHeuristic();
-		_heuristic.setHeuristic(problemName);
 	}
 
 

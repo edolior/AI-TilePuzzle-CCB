@@ -15,12 +15,7 @@ public class TilePuzzleHeuristic implements IHeuristic
 		return calcH(problemState);
 	}
 
-	public void setHeuristic(String type){
-		int size = 0;
-		if (type.contains("3x3"))
-			size = 3;
-		else if (type.contains("4x4"))
-			size = 4;
+	private void setHeuristic(int size){
 		map = new HashMap<>();
 		int count = 1;
 		boolean stop = false;
@@ -40,6 +35,7 @@ public class TilePuzzleHeuristic implements IHeuristic
 		IProblemState reducedProblem = new TilePuzzleState((TilePuzzleState)problemState);
 		int[][] myGridState = (int[][])reducedProblem.getCurrentStateCopy();
 		int size = myGridState.length;
+		setHeuristic(size);
 		int result = 0;
 		int destSpot = 0;
 		int currSpot = 0;
